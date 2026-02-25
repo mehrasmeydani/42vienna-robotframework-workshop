@@ -32,12 +32,12 @@ Claude Code can generate complete test files from descriptions.
 
 ## Robot Framework MCP Server
 
-This project includes configuration for the RF MCP Server, which gives AI agents access to Robot Framework-specific knowledge:
+This project includes configuration for [rf-mcp](https://pypi.org/project/rf-mcp/), which gives AI agents access to Robot Framework-specific knowledge:
 - Keyword documentation from installed libraries
 - Library-specific patterns and best practices
 - Test structure conventions
 
-The MCP server is configured in `.claude/settings.json`.
+The MCP server is configured in `.claude/settings.json` and installed as a dev dependency.
 
 ## Best Practices
 

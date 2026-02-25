@@ -54,6 +54,7 @@ This workshop focuses on **web testing** using Browser Library against [SauceDem
 - [Exercises](docs/04-exercises.md) — progressive hands-on exercises
 - [Troubleshooting](docs/05-troubleshooting.md) — common issues and fixes
 - [AI-Assisted Testing](docs/06-ai-assisted-testing.md) — using AI for test generation
+- [Student Workflow](docs/07-student-workflow.md) — fork, write tests, submit PR
 - [Windows Setup](docs/windows-setup.md) — detailed Windows instructions
 
 ## Common Commands

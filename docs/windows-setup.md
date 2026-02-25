@@ -110,3 +110,13 @@ This is the easiest option — everything runs in the cloud.
 | Docker build hangs | Increase Docker Desktop memory limit (Settings → Resources) |
 | Git line ending warnings | Run `git config --global core.autocrlf input` |
 | Slow filesystem in WSL | Move project out of `/mnt/c/` to `~/` in WSL |
+
+## Verify Your Setup
+
+Regardless of which option you chose, run the environment check:
+
+```bash
+python scripts/check_environment.py
+```
+
+This checks all 11 prerequisites and shows exactly what's wrong and how to fix it.

@@ -1,7 +1,7 @@
 {
     "mcpServers": {
-        "robotframework-mcp": {
-            "command": "robotframework-mcp",
+        "rf-mcp": {
+            "command": "rf-mcp",
             "type": "stdio"
         }
     }

@@ -12,6 +12,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "robotframework-robocop>=8.0",
+    "rf-mcp>=0.30",
 ]
 
 [tool.uv]

@@ -1,6 +1,6 @@
 name: PR Test Feedback
 on:
-  pull_request:
+  pull_request_target:
     branches: [main]
 
 permissions:
@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
@@ -73,7 +75,7 @@ jobs:
 
             </details>
 
-            📦 Full results (log.html, report.html) are available as build artifacts.
+            Full results (log.html, report.html) are available as build artifacts.
             `;
 
             await github.rest.issues.createComment({

@@ -4,7 +4,13 @@ Progressive exercises from beginner to advanced. Work through them in order.
 
 ## Exercise 1: Verify Your Setup (Warmup)
 
-Run the setup verification test:
+First, check that your environment is ready:
+
+```bash
+python scripts/check_environment.py
+```
+
+If all checks pass, run the setup verification test:
 
 ```bash
 uv run robot tests/00_setup_verification/
