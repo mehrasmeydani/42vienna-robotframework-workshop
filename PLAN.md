@@ -110,6 +110,7 @@ Students → GitHub (PRs, branches) → GitHub Actions (CI)
 - [ ] **VERIFY:** Does `github-sync` CronJob auto-create GitLab projects, or must they be pre-created? Check the sync script logic.
 - [ ] **VERIFY:** Is the GitLab instance publicly accessible (needed if students browse test reports there)?
 - [ ] **VERIFY:** Can students at 42 Vienna reach `github.com`, `*.github.dev`, `*.githubusercontent.com` through their network?
+- [x] **DECIDED:** GitHub Actions for CI (no GitLab runner, ARM64-only cluster). GitHub is primary.
 
 ---
 
@@ -299,8 +300,9 @@ Note: `uv.lock` is NOT in .gitignore — it must be committed for reproducible i
 
 ### CURRENT ISSUES — Phase 1
 
-- [ ] **DECIDE:** Should the repo be created via GitHub web UI or via `gh repo create` CLI?
+- [x] **DECIDED:** Repo created via `gh repo create` CLI (public, with description).
 - [ ] **DECIDE:** Should GitLab project be manually created or left for auto-sync?
+- [x] **RESOLVED:** GitHub auth required `workflow` scope for pushing workflow files. Added via `gh auth refresh -s workflow`.
 
 ---
 
@@ -1180,86 +1182,88 @@ Phase 1 (Repo + pyproject.toml)
 - [ ] Confirm `github-sync` CronJob auto-creates GitLab projects
 
 ### Phase 1: Repository Creation (Day 1-2)
-- [ ] Create GitHub repo `HackXIt/42vienna-robotframework-workshop` (public)
-- [ ] Configure local git remotes
-- [ ] Create `pyproject.toml` with all dependencies and tool config
-- [ ] Create `.python-version` (3.12)
-- [ ] Create `.gitignore`
-- [ ] Create `.vscode/settings.json` and `extensions.json`
-- [ ] Create full directory structure (tests/, resources/, scripts/, docs/)
-- [ ] Generate `uv.lock` via `uv lock`
-- [ ] Create LICENSE (MIT)
-- [ ] Initial commit and push
+- [x] Create GitHub repo `HackXIt/42vienna-robotframework-workshop` (public)
+- [x] Configure local git remotes
+- [x] Create `pyproject.toml` with all dependencies and tool config
+- [x] Create `.python-version` (3.12)
+- [x] Create `.gitignore`
+- [x] Create `.vscode/settings.json` and `extensions.json`
+- [x] Create full directory structure (tests/, resources/, scripts/, docs/)
+- [x] Generate `uv.lock` via `uv lock`
+- [x] Create LICENSE (MIT)
+- [x] Initial commit and push
 
 ### Phase 2: DevContainer (Day 2)
-- [ ] Create `.devcontainer/devcontainer.json`
-- [ ] Create `.devcontainer/post-create.sh`
+- [x] Create `.devcontainer/devcontainer.json`
+- [x] Create `.devcontainer/post-create.sh`
 - [ ] Test DevContainer opens in GitHub Codespaces
 - [ ] Test DevContainer opens in local VSCode + Docker
-- [ ] Verify `uv sync --locked` completes
-- [ ] Verify `rfbrowser init chromium` completes
+- [ ] Verify `uv sync --locked` completes in Codespace
+- [ ] Verify `rfbrowser init chromium` completes in Codespace
 - [ ] Verify RobotCode extension works (syntax highlighting, autocomplete)
 - [ ] Measure total build time (target: < 5 minutes)
 
 ### Phase 3: Readiness Script (Day 2-3)
-- [ ] Create `scripts/check_environment.py`
-- [ ] Implement platform detection (Linux/macOS/Windows/WSL)
-- [ ] Implement all 11 checks with actionable error messages
-- [ ] Implement colored terminal output (ANSI with TTY detection)
-- [ ] Implement summary box at the end
+- [x] Create `scripts/check_environment.py`
+- [x] Implement platform detection (Linux/macOS/Windows/WSL)
+- [x] Implement all 11 checks with actionable error messages
+- [x] Implement colored terminal output (ANSI with TTY detection)
+- [x] Implement summary box at the end
 - [ ] Test on Linux (Codespace)
 - [ ] Test failure messages (run on bare machine, verify output is helpful)
-- [ ] Verify exit code behavior (0 = all pass, 1 = any fail)
-- [ ] Verify script runs with stdlib only (no imports from installed packages)
+- [x] Verify exit code behavior (0 = all pass, 1 = any fail)
+- [x] Verify script runs with stdlib only (no imports from installed packages)
 
 ### Phase 4: Test Suites (Day 2-3)
-- [ ] Create `resources/common.resource` (shared setup/teardown, base URL)
-- [ ] Create `resources/login_page.resource`
-- [ ] Create `resources/products_page.resource`
-- [ ] Create `resources/cart_page.resource`
-- [ ] Create `resources/checkout_page.resource`
-- [ ] Create `tests/00_setup_verification/verify_setup.robot`
-- [ ] Create `tests/01_first_test/first_browser_test.robot` (heavily commented)
-- [ ] Create `tests/02_login_tests/login.robot` (with Template)
-- [ ] Create `tests/03_product_tests/product_catalog.robot`
-- [ ] Create `tests/04_cart_tests/shopping_cart.robot`
-- [ ] Create `tests/05_checkout_tests/checkout_flow.robot`
-- [ ] Create `tests/06_e2e_scenarios/complete_purchase.robot`
-- [ ] Create `tests/student_exercises/_template.robot`
-- [ ] Create `tests/student_exercises/README.md`
-- [ ] Verify ALL tests pass locally
+- [x] Create `resources/common.resource` (shared setup/teardown, base URL)
+- [x] Create `resources/saucedemo.resource` (convenience import for all pages)
+- [x] Create `resources/login_page.resource`
+- [x] Create `resources/products_page.resource`
+- [x] Create `resources/cart_page.resource`
+- [x] Create `resources/checkout_page.resource`
+- [x] Create `tests/00_setup_verification/verify_setup.robot`
+- [x] Create `tests/01_first_test/first_browser_test.robot` (heavily commented)
+- [x] Create `tests/02_login_tests/login.robot` (individual cases, [Template] mentioned in docs)
+- [x] Create `tests/03_product_tests/product_catalog.robot`
+- [x] Create `tests/04_cart_tests/shopping_cart.robot`
+- [x] Create `tests/05_checkout_tests/checkout_flow.robot`
+- [x] Create `tests/06_e2e_scenarios/complete_purchase.robot`
+- [x] Create `tests/student_exercises/_template.robot`
+- [x] Create `tests/student_exercises/README.md`
+- [ ] Verify ALL tests pass locally (requires `uv sync` + `rfbrowser init`)
 - [ ] Verify ALL tests pass in DevContainer/Codespace
 - [ ] Verify SauceDemo selectors are current
 
 ### Phase 5: CI/CD (Day 3)
-- [ ] Create `.github/workflows/robot-tests.yml`
-- [ ] Create `.github/workflows/pr-feedback.yml`
-- [ ] Create `.github/PULL_REQUEST_TEMPLATE.md`
-- [ ] Test CI runs on push to main
+- [x] Create `.github/workflows/robot-tests.yml`
+- [x] Create `.github/workflows/pr-feedback.yml`
+- [x] Create `.github/PULL_REQUEST_TEMPLATE.md`
+- [ ] Test CI runs on push to main (verify after first push triggers workflow)
 - [ ] Test CI runs on PR
 - [ ] Verify test results artifact is uploaded
-- [ ] Verify PR comment with results summary (if implementing pr-feedback)
+- [ ] Verify PR comment with results summary (pr-feedback workflow)
 - [ ] (Nice-to-have) Configure GitHub Pages for test reports
 
 ### Phase 6: AI Integration (Day 3-4)
-- [ ] Create `CLAUDE.md` with RF conventions, SauceDemo selectors, uv commands
-- [ ] Create `AGENTS.md` (or symlink to CLAUDE.md)
-- [ ] Create `.claude/settings.json` with MCP server config
-- [ ] Verify `robotframework-mcp` package exists and works
+- [x] Create `CLAUDE.md` with RF conventions, SauceDemo selectors, uv commands
+- [x] Create `AGENTS.md` (separate file with agent-specific instructions)
+- [x] Create `.claude/settings.json` with MCP server config
+- [ ] Verify `robotframework-mcp` package exists on PyPI and works
+- [ ] Add `robotframework-mcp` to `pyproject.toml` dev dependencies (if it exists)
 - [ ] Prepare AI demo script (natural language → RF test → run → refine)
 - [ ] Test the demo end-to-end
 
 ### Phase 7: Documentation (Day 4-5)
-- [ ] Create `README.md` (quick start, prerequisites, agenda, badges)
-- [ ] Create `docs/01-getting-started.md` (3 setup paths)
-- [ ] Create `docs/02-rf-syntax-cheatsheet.md`
-- [ ] Create `docs/03-browser-library-guide.md`
-- [ ] Create `docs/04-exercises.md` (8 progressive exercises)
-- [ ] Create `docs/05-troubleshooting.md`
-- [ ] Create `docs/06-ai-assisted-testing.md`
-- [ ] Create `docs/windows-setup.md` (decision tree, 3 paths, common issues)
-- [ ] All docs reference `uv` commands (not pip)
-- [ ] All docs end with readiness script verification step
+- [x] Create `README.md` (quick start, prerequisites, agenda, badges)
+- [x] Create `docs/01-getting-started.md` (3 setup paths)
+- [x] Create `docs/02-rf-syntax-cheatsheet.md`
+- [x] Create `docs/03-browser-library-guide.md`
+- [x] Create `docs/04-exercises.md` (8 progressive exercises)
+- [x] Create `docs/05-troubleshooting.md`
+- [x] Create `docs/06-ai-assisted-testing.md`
+- [x] Create `docs/windows-setup.md` (decision tree, 3 paths, common issues)
+- [x] All docs reference `uv` commands (not pip)
+- [ ] All docs end with readiness script verification step (verify each doc)
 - [ ] Proofread all docs for accuracy and clarity
 - [ ] (Nice-to-have) Add screenshots to docs
 
@@ -1277,6 +1281,7 @@ Phase 1 (Repo + pyproject.toml)
 - [ ] Verify PR template appears when creating PR (from both fork and branch)
 - [ ] Verify GitHub Actions workflow approval flow for first-time fork contributors
 - [ ] Prepare `gh api` one-liner for quickly adding collaborators (Plan B fallback)
+- [ ] Configure GitHub Actions settings: "Require approval for first-time contributors" (minimize fork CI friction)
 
 ### Phase 10: Workshop Agenda (Day 5-6)
 - [ ] Finalize timeline (fits within 3-4 hours)
@@ -1335,6 +1340,8 @@ Phase 1 (Repo + pyproject.toml)
 |-------|--------|---------|
 | GitHub Actions minutes | LOW RISK | Free tier: 2000 min/month. Each run ~3-5 min. With ~20 students × ~5 PRs each = ~100 runs = ~300-500 min. Well within limits. |
 | `astral-sh/setup-uv` version | OPEN | Verify `@v7` is latest stable. Check https://github.com/astral-sh/setup-uv for current version. |
+| GitHub auth `workflow` scope | RESOLVED | Pushing workflow files requires the `workflow` OAuth scope. Fixed via `gh auth refresh -h github.com -s workflow`. |
+| CI first run validation | OPEN | The push to main should have triggered the first CI run. Check GitHub Actions tab to verify tests pass. |
 
 ### PHASE 9 — Student Workflow
 
@@ -1363,4 +1370,4 @@ Phase 1 (Repo + pyproject.toml)
 ---
 
 *Plan created: March 9, 2026*
-*Last updated: March 9, 2026*
+*Last updated: March 9, 2026 — Phase 1-7 implementation complete, TODO tasklist updated*
