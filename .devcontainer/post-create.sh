@@ -15,11 +15,15 @@ echo "uv version: $(uv version)"
 echo "Installing dependencies with uv sync..."
 uv sync --locked
 
-# Step 3: Initialize Browser Library (install Playwright + Chromium)
+# Step 3: Install Playwright system dependencies (may need sudo in containers)
+echo "Installing Playwright system dependencies..."
+npx --yes playwright install-deps chromium 2>/dev/null || true
+
+# Step 4: Initialize Browser Library (install Playwright + Chromium)
 echo "Initializing Browser Library (Chromium only — ~250MB download)..."
 uv run rfbrowser init chromium
 
-# Step 4: Verify the environment
+# Step 5: Verify the environment
 echo ""
 echo "Running environment checks..."
 uv run python scripts/check_environment.py
