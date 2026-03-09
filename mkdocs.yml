@@ -57,6 +57,7 @@ nav:
     - AI-Assisted Testing: ai-assisted-testing.md
     - Workshop Agenda: workshop-agenda.md
     - AI Demo Script: ai-demo-script.md
+    - Presentation: https://hackxit.github.io/42vienna-robotframework-workshop/presentation.html
   - Keywords: keywords/index.md
 
 docs_dir: docs
