@@ -4,9 +4,12 @@ on:
     branches: [main]
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/badge.json'
 
 permissions:
   security-events: write
+  contents: write
 
 jobs:
   lint:
@@ -77,3 +80,44 @@ jobs:
         with:
           name: robot-results
           path: results/
+
+      - name: Generate test result badge
+        if: always()
+        run: |
+          python3 - << 'EOF'
+          import json
+          try:
+              from robot.api import ExecutionResult
+              result = ExecutionResult('results/output.xml')
+              stats = result.statistics.total
+              passed = stats.passed
+              failed = stats.failed
+              total = passed + failed
+              if failed == 0:
+                  color = "brightgreen"
+                  message = f"{passed}/{total} passed"
+              else:
+                  color = "red"
+                  message = f"{passed}/{total} passed, {failed} failed"
+          except Exception as e:
+              print(f"Could not parse test results: {e}")
+              color = "lightgrey"
+              message = f"error: {e}"
+          badge = {"schemaVersion": 1, "label": "tests", "message": message, "color": color}
+          with open('docs/badge.json', 'w') as f:
+              json.dump(badge, f)
+          print(f"Badge written: {badge}")
+          EOF
+
+      - name: Commit test result badge
+        if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/badge.json
+          if git diff --staged --quiet; then
+            echo "No changes to badge.json"
+          else
+            git commit -m "chore: update test result badge"
+            git push
+          fi
