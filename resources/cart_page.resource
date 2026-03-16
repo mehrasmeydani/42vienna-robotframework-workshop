@@ -24,6 +24,11 @@ Cart Should Be Empty
     ${count}=    Get Length    ${items}
     Should Be Equal As Numbers    ${count}    0
 
+Remove Item From Cart
+    [Documentation]    Click the Remove button for a product in the cart by its name.
+    [Arguments]    ${product_name}
+    Click    css=.cart_item:has-text("${product_name}") button[id^="remove"]
+
 Proceed To Checkout
     [Documentation]    Click the Checkout button on the cart page.
     Click    ${CHECKOUT_BUTTON}
