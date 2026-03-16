@@ -6,3 +6,4 @@ Resource          login_page.resource
 Resource          products_page.resource
 Resource          cart_page.resource
 Resource          checkout_page.resource
+Resource		  product_list.resource
