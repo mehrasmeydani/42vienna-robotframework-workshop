@@ -2,6 +2,7 @@
 
 [![Robot Framework Tests](https://github.com/HackXIt/42vienna-robotframework-workshop/actions/workflows/robot-tests.yml/badge.svg)](https://github.com/HackXIt/42vienna-robotframework-workshop/actions/workflows/robot-tests.yml)
 [![Test Results](https://img.shields.io/endpoint?url=https://hackxit.github.io/42vienna-robotframework-workshop/badge.json)](https://github.com/HackXIt/42vienna-robotframework-workshop/actions/workflows/robot-tests.yml)
+[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://hackxit.github.io/42vienna-robotframework-workshop/)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/HackXIt/42vienna-robotframework-workshop)
 
 **Browser Library & Playwright for Web Testing**
